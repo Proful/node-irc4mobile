@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>Hacker IRC</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/handlebars.1.0.0.beta.3.js"></script>
+    <script src="/js/client.js"></script>
+    <script type='text/x-handlebars-template',id='entry-template'>
+      <div class="msg">
+        <p>{{this.message}}</p>
+      </div>
+    </script>
+  </head>
+  <body>
+   <h1>Hacker IRC</h1>
+   <div id="msgs">
+   </div>
+  </body>
+</html>
