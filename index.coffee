@@ -13,20 +13,30 @@ io  = require('socket.io').listen(app)
 console.log "Server started listening on port 80..."
 app.listen 80
 
-io.sockets.on 'connection', (socket) ->
+client = new irc.Client 'localhost', 'butu5bot', {
+    debug: false,
+    channels: ['#node.js']
+}
 
-  console.log "Connection establishes...."
-  client = new irc.Client 'localhost', 'ircbot', {
-      debug: false,
-      channels: ['#node.js']
-  }
+client.addListener 'error',  (message) ->
+  console.log 'ERROR: %s: %s', message.command, message.args.join(' ') 
 
-  client.addListener 'error',  (message) ->
-    console.log 'ERROR: %s: %s', message.command, message.args.join(' ') 
+# client.join '#node.js'
 
-  client.addListener 'message', (from, to, message) ->
-    console.log from + " > " + message
-    socket.emit 'msg', {from: from,message: message}
+###
+client.addListener 'message', (from, to, message) ->
+  console.log from + " > " + message
+  socket.emit 'msg', {from: from,message: message}
+###
+socket = null
+msgReceived = (from, to, message) ->
+  if socket?
+    socket.emit "msg", {from: from, message: message}
+    console.log "socket is not null"
+  else
+    console.log "socket is null"
 
-  client.join '#node.js'
+client.addListener 'message', msgReceived
 
+io.sockets.on 'connection', (socket1) ->
+  socket = socket1
