@@ -1,6 +1,6 @@
 (function() {
   var socket;
-  socket = io.connect("http://localhost");
+  socket = io.connect("http://localhost:5000");
   socket.on("msg", function(data) {
     var html, source, template;
     source = $("#msg-tmpl").html();

@@ -13,8 +13,8 @@ io  = require('socket.io').listen(app)
 console.log "Server started listening on port 80..."
 app.listen 5000
 
-#client = new irc.Client 'irc.freenode.net', 'pkbot', {
-client = new irc.Client 'localhost', 'pkbot', {
+client = new irc.Client 'irc.freenode.net', 'pkbot', {
+#client = new irc.Client 'localhost', 'pkbot', {
     debug: true,
     channels: ['#node.js']
 }

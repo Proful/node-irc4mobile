@@ -1,4 +1,4 @@
-socket = io.connect "http://localhost"
+socket = io.connect "http://localhost:5000"
 
 socket.on "msg", (data) ->
   source = $("#msg-tmpl").html()
